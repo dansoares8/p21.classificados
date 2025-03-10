@@ -1,0 +1,4 @@
+Informações sobre o projeto, dados gerais, tecnologias, escopo e divisões do projeto, etc.
+Progresso do projeto. Divido em 12 partes.
+Status da Parte 1: 
+Status da Parte 2: 
