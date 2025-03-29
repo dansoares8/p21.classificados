@@ -17,8 +17,13 @@
         $valor = addslashes($_POST['valor']);
         $descricao = addslashes($_POST['descricao']);
         $estado = addslashes($_POST['estado']);
+        if(isset($_FILES['fotos'])){
+            $fotos = $_FILES['fotos'];
+        } else {
+            $fotos = array();
+        }
 
-        $a->editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $_GET['id']);
+        $a->editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $_GET['id']);
 
         ?>
         <div class="container alert alert-success">Produto editado com Sucesso!</div>
@@ -78,6 +83,24 @@
                 <option value="1" <?php echo($info['estado']=='1')?'selected="selected"':''; ?>>Bom</option>
                 <option value="2" <?php echo($info['estado']=='2')?'selected="selected"':''; ?>>Ótimo</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="add_foto">Fotos do anúncio:</label>
+            <input type="file" name="fotos[]" multiple />
+            <br/>
+            <div class="panel panel-default">
+                <div class="panel-heading">Fotos do Anúncio</div>
+                <div class="panel-body">
+                    <?php foreach($info['fotos'] as $foto): ?>
+                    <div class="foto_item">
+                        <img src="assets/images/anuncios/<?php echo $foto['url']; ?>" class="img-thumbnail" border="0" />
+                        <br/>
+                        <a href="excluir-foto.php?id=<?php echo $foto['id']; ?>" class="btn btn-default" style="margin-top:10px;">Excluir Imagem</a>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
 
         <input type="submit" value="Salvar" class="btn btn-default">
